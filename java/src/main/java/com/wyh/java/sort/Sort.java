@@ -1,7 +1,5 @@
 package com.wyh.java.sort;
 
-import java.util.Arrays;
-
 /**
  * Created by wyh on 2019/3/26.
  * 排序算法
@@ -12,10 +10,9 @@ public class Sort {
      * 时间复杂度：O(n2)
      */
     public static void sort1(int[] array) {
-        int temp;
         // 需要走（array.length-1）趟，每趟的目的就是把最大值放最后边
         for (int i = 0; i < array.length - 1; i++) {
-            for (int j = i; j < array.length - 1; j++) {
+            for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j] > array[j + 1]) {  // 比较相邻两数的大小，大的放后边
                     swap(array, j, j + 1);
                 }
@@ -28,11 +25,10 @@ public class Sort {
      * 时间复杂度：O(n2)
      */
     public static void sort2(int[] array) {
-        int temp;
         // 需要走（array.length-1）趟，每趟的目的是排好一个(i+1)的队列
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = i + 1; j > 0; j--) {
-                if (array[j] < array[j - 1]) { // 插入方式类似冒泡
+                if (array[j] < array[j - 1]) { // 比较相邻两数的大小，插入到已排序序列的合适的位置
                     swap(array, j, j - 1);
                 }
             }
@@ -47,7 +43,7 @@ public class Sort {
         // 需要走（array.length-1）趟，每趟的目的就是找到遍历的最小数交换到前面
         for (int i = 0; i < array.length - 1; i++) {
             int minIndex = i;
-            for (int j = i + 1; j < array.length; j++) {
+            for (int j = i + 1; j < array.length - 1; j++) {
                 if (array[j] < array[minIndex]) {
                     minIndex = j;
                 }
@@ -92,7 +88,6 @@ public class Sort {
         }
         //从右向左和从左向右的遍历已经到达同一位置，i等于j，将基准位和这个位置交换
         swap(array, startIndex, i);
-        System.out.println(Arrays.toString(array));
         //递归处理左半列表
         quickSort(array, startIndex, i - 1);
         //递归处理右半列表
