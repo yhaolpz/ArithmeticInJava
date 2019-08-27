@@ -179,6 +179,37 @@ public class Sort {
 
 
     /**
+     * test
+     */
+    public static void sortTest(int[] array) {
+        quickSort2(array, 0, array.length - 1);
+    }
+
+    public static void quickSort2(final int[] array, final int startIndex, final int endIndex) {
+        if (startIndex > endIndex) {
+            return;
+        }
+        int temp = array[startIndex];
+        int i = startIndex;
+        int j = endIndex;
+        while (i < j) {
+            while (array[j] >= temp && i < j) {
+                j--;
+            }
+            while (array[i] <= temp && i < j) {
+                i++;
+            }
+            if (i < j) {
+                swap(array, i, j);
+            }
+        }
+        swap(array, startIndex, i);
+        quickSort2(array, startIndex, i - 1);
+        quickSort2(array, i + 1, endIndex);
+    }
+
+
+    /**
      * 交换数据
      */
     private static void swap(int[] array, int i, int j) {
